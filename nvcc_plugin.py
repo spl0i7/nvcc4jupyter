@@ -8,6 +8,7 @@ import IPython.core.magic as ipym
 
 compiler = '/usr/local/cuda/bin/nvcc'
 ext = '.cu'
+std_flag = '-std=c++11'
 
 
 def get_argparser():
@@ -26,7 +27,7 @@ class NVCCPlugin(ipym.Magics):
 
     @staticmethod
     def compile(file_path):
-        subprocess.check_output([compiler, file_path + ext, "-o", file_path + ".out"], stderr=subprocess.STDOUT)
+        subprocess.check_output([compiler, std_flag ,file_path + ext, "-o", file_path + ".out"], stderr=subprocess.STDOUT)
 
     def run(self, file_path, timeit=False):
         if timeit:
